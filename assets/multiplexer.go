@@ -2,7 +2,7 @@ package assets
 
 import "fmt"
 
-func GetMultiplexer(projectName string) string {
+func GetMultiplexer(projectName string) (string, string) {
 	return fmt.Sprintf(`package multiplexer
 
 import (
@@ -138,5 +138,5 @@ func registerServer(p registerServerParams) {
 		},
 	)
 }
-`, projectName)
+`, projectName), "./" + projectName + "/source/multiplexer/multiplexer.go"
 }

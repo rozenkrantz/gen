@@ -1,6 +1,6 @@
 package assets
 
-func GetLogger() string {
+func GetLogger(projectName string) (string, string) {
 	return `package logger
 
 import (
@@ -45,5 +45,5 @@ func Log(logger *zap.Logger, message, service, function, operation string) {
 		zap.String("Operation", operation),
 	)
 }
-`
+`, "./" + projectName + "/source/logger/logger.go"
 }

@@ -1,6 +1,6 @@
 package assets
 
-func GetConfigFile() string {
+func GetConfigFile(projectName string) (string, string) {
 	return `package config
 
 import (
@@ -56,5 +56,5 @@ func (c *config) IsSet(key string) bool {
 func (c *config) GetInt(key string) int64 {
 	return c.cfg.GetInt64(key)
 }
-`
+`, "./" + projectName + "/source/config/config.go"
 }

@@ -1,6 +1,6 @@
 package assets
 
-func GetServiceModule() string {
+func GetServiceModule(projectName string) (string, string) {
 	return `package services
 
 import (
@@ -8,5 +8,5 @@ import (
 )
 
 var Module = fx.Options()
-`
+`, "./" + projectName + "/source/services/module.go"
 }

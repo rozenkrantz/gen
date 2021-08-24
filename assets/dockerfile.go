@@ -2,7 +2,7 @@ package assets
 
 import "fmt"
 
-func GetDockerfile(projectName string) string {
+func GetDockerfile(projectName string) (string, string) {
 	return fmt.Sprintf(`FROM golang:1.16-alpine
 
 WORKDIR /app
@@ -15,5 +15,5 @@ COPY . .
 
 RUN go build -o /%[1]s
 
-CMD [ "/%[1]s" ]`, projectName)
+CMD [ "/%[1]s" ]`, projectName), "./" + projectName + "/Dockerfile"
 }

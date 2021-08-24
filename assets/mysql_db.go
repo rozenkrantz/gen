@@ -2,7 +2,7 @@ package assets
 
 import "fmt"
 
-func GetMysqlDB(projectName string) string {
+func GetMysqlDB(projectName string) (string, string) {
 	return fmt.Sprintf(`package db
 
 import (
@@ -104,5 +104,5 @@ func testConn(par param) {
 	}
 
 	par.Logger.Info("Successfully connected to database.")
-}`, projectName)
+}`, projectName), "./" + projectName + "/source/db/db.go"
 }

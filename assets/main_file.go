@@ -2,7 +2,7 @@ package assets
 
 import "fmt"
 
-func GetMainFile(projectName string) string {
+func GetMainFile(projectName, mainFileName string) (string, string) {
 	return fmt.Sprintf(`package main
 
 import (
@@ -29,5 +29,5 @@ func main() {
 
 	fx.New(mainModules).Run()
 
-}`, projectName)
+}`, projectName), "./" + projectName + "/" + mainFileName
 }

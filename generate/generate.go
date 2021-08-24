@@ -19,57 +19,26 @@ type Config struct {
 func Build(config *Config) error {
 
 	for _, dir := range getDirs() {
-		if err := os.MkdirAll(dir, os.ModePerm); err != nil {
+		if err := os.MkdirAll("./"+config.ProjectName+dir, os.ModePerm); err != nil {
 			return err
 		}
 	}
 
-	err := writeFile(assets.GetMainFile(config.ProjectName), "./"+config.MainFile)
+	err := writeFile(assets.GetMainFile(config.ProjectName, config.MainFile))
 	if err != nil {
 		return err
 	}
 
-	err = writeFile(assets.GetDockerfile(config.ProjectName), "./Dockerfile")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetENV(config.ProjectName), "./.env")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetConfigFile(), "./source/config/config.go")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetMysqlDB(config.ProjectName), "./source/db/db.go")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetLogger(), "./source/logger/logger.go")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetMultiplexer(config.ProjectName), "./source/multiplexer/multiplexer.go")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetHandlerModule(), "./source/handlers/module.go")
-	if err != nil {
-		return err
-	}
-
-	err = writeFile(assets.GetServiceModule(), "./source/services/module.go")
-	if err != nil {
-		return err
+	for _, dataFunc := range getDataFunc() {
+		data, path := dataFunc(config.ProjectName)
+		err = writeFile(data, path)
+		if err != nil {
+			return err
+		}
 	}
 
 	cmd := exec.Command("go", "mod", "init", config.ProjectName)
+	cmd.Dir = "./" + config.ProjectName
 	err = cmd.Run()
 
 	if err != nil {
@@ -92,8 +61,21 @@ func writeFile(b string, file string) error {
 
 func getDirs() []string {
 	return []string{
-		"./source", "./source/config", "./source/db",
-		"./source/config", "./source/entity", "./source/handlers",
-		"./source/logger", "./source/multiplexer", "./source/services",
+		"/source", "/source/config", "/source/db",
+		"/source/config", "/source/entity", "/source/handlers",
+		"/source/logger", "/source/multiplexer", "/source/services",
+	}
+}
+
+func getDataFunc() []func(string) (string, string) {
+	return []func(string) (string, string){
+		assets.GetENV,
+		assets.GetServiceModule,
+		assets.GetHandlerModule,
+		assets.GetDockerfile,
+		assets.GetLogger,
+		assets.GetMultiplexer,
+		assets.GetMysqlDB,
+		assets.GetConfigFile,
 	}
 }

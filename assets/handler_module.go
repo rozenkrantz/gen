@@ -1,6 +1,6 @@
 package assets
 
-func GetHandlerModule() string {
+func GetHandlerModule(projectName string) (string, string) {
 	return `package handlers
 
 import (
@@ -8,5 +8,5 @@ import (
 )
 
 var Module = fx.Options()
-`
+`, "./" + projectName + "/source/handlers/module.go"
 }

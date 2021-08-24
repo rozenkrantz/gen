@@ -2,7 +2,7 @@ package assets
 
 import "fmt"
 
-func GetENV(projectName string) string {
+func GetENV(projectName string) (string, string) {
 	return fmt.Sprintf(`DB_DRIVER="mysql"
 DB_USERNAME="doro"
 DB_PASSWORD="12345"
@@ -16,5 +16,5 @@ SERVER_PORT=":7070"
 
 BASE_API="/"
 LOG_PATH="./log"
-`, projectName)
+`, projectName), "./" + projectName + "/.env"
 }
