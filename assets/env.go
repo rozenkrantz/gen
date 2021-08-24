@@ -7,7 +7,7 @@ func GetENV(projectName string) string {
 DB_USERNAME="doro"
 DB_PASSWORD="12345"
 DB_PROTOCOL="tcp"
-DB_ADDRESS="%[1]s"
+DB_ADDRESS="localhost"
 DB_PORT="3306"
 DB_NAME="%[1]s"
 DB_PARAMS="parseTime=true"

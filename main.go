@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	mainInfo    = "General info"
-	projectInfo = "Project name"
+	mainInfo    = "mainInfo"
+	projectInfo = "projectInfo"
 )
 
 var initFlags = []cli.Flag{
@@ -30,7 +30,8 @@ var initFlags = []cli.Flag{
 
 func initAction(c *cli.Context) error {
 	return generate.Build(&generate.Config{
-		MainFile: c.String(mainInfo),
+		MainFile:    c.String(mainInfo),
+		ProjectName: c.String(projectInfo),
 	})
 }
 
