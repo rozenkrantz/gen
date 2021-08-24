@@ -10,7 +10,7 @@ $ go get -u github.com/dequinox/gen
 2. Run `gen init -p [PROJECT-NAME]` to generate project structure.
 
 ```shell
-$ gen init -p [PRJECT-NAME]
+$ gen init -p [PROJECT-NAME]
 ```
 
 # gen cli 
