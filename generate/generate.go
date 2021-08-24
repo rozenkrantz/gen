@@ -77,5 +77,6 @@ func getDataFunc() []func(string) (string, string) {
 		assets.GetMultiplexer,
 		assets.GetMysqlDB,
 		assets.GetConfigFile,
+		assets.GetGitIgnore,
 	}
 }
